@@ -1,11 +1,12 @@
 # auto-deriv
-## 開発手順
+自動微分を二重数でしてみるライブラリ。
 
 <!-- ### ブランチ戦略
 
 Githubフローです。MR先はmasterブランチです。 -->
 
-### 開発環境構築
+### 環境について
+numpy があれば動く。推奨されていない `numpy.matrix` を使っているのでバージョンによっては今後動かなくなるかも。
 
 [pipenv](https://github.com/pypa/pipenv) で環境を作成します。pipenv の使い方は[公式ドキュメント](https://pipenv-ja.readthedocs.io/ja/translate-ja/)を参照してください。
 
