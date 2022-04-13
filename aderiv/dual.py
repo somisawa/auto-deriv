@@ -8,6 +8,12 @@ class Dual:
         a: float,
         b: float
     ) -> None:
+        """二重数を定義
+
+        Args:
+            a (float): 実部
+            b (float): 二重部(？)
+        """
         self.a = float(a)
         self.b = float(b)
         self.value = _make_dual(a, b)
@@ -23,12 +29,31 @@ class Dual:
 
     @staticmethod
     def analyze(d: Dual or np.matrix) -> bool:
+        """二重数かどうか判定する
+
+        Args:
+            d (Dual or np.matrix): 判定したいオブジェクト
+
+        Returns:
+            bool: 正誤
+        """
         cond1 = np.isclose(d[0, 1], - d[1, 0])
         cond2 = np.isclose(d[0, 0] + d[1, 0], d[0, 1] + d[1, 1])
         return cond1 and cond2
 
     @staticmethod
-    def undual(d: Dual or np.matrix) :
+    def undual(d: Dual or np.matrix) -> tuple(float, float):
+        """二重数(行列表示)をタプルに変換
+
+        Args:
+            d (Dual or np.matrix): 二重数
+
+        Raises:
+            ValueError: 二重数じゃないと怒る
+
+        Returns:
+            tuple(float, float): 二重数の2つ組
+        """
         if not (Dual.analyze(d)):
             raise ValueError(f'input is not dual number.')
         else:
@@ -36,6 +61,17 @@ class Dual:
 
     @staticmethod
     def from_value(value: np.matrix) -> Dual:
+        """np.matrixから二重数を作る
+
+        Args:
+            value (np.matrix): 行列
+
+        Raises:
+            ValueError: 二重数じゃないと怒る
+
+        Returns:
+            Dual: 作成された二重数
+        """
         if Dual.analyze(value):
             return Dual(*Dual.undual(value))
         else:
